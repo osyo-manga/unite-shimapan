@@ -1,0 +1,2 @@
+" add unite.vim option
+let g:unite_cursor_line_highlight = "Normal"
