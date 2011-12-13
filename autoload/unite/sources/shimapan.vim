@@ -6,11 +6,11 @@ endfunction
 
 let s:source = {
 \	"name" : "shimapan",
-\	"syntax" : "uniteSource_shimapan"
+\	"syntax" : "uniteSource__shimapan",
+\	"hooks" : {}
 \}
 
 function! s:source.gather_candidates(args, context)
-" 	let b:unite_cursor_line_highlight="Normal"
 	let space_size = 2
 	let width = winwidth(winnr("$"))-10
 	let height = width / (space_size*2)
@@ -23,3 +23,12 @@ function! s:source.gather_candidates(args, context)
 	endfor
 	return map(result, "{'word' : v:val, 'is_dummy' : 1}")
 endfunction
+
+function! s:source.hooks.on_syntax(args, context)
+	syntax match shimapan_blue /b/ containedin=uniteSource__shimapan contained
+	syntax match shimapan_white /w/ containedin=uniteSource__shimapan contained
+
+	highlight shimapan_blue ctermbg=cyan ctermfg=cyan guibg=cyan guifg=cyan
+	highlight shimapan_white ctermfg=white ctermbg=white guifg=white guibg=white
+endfunction
+
